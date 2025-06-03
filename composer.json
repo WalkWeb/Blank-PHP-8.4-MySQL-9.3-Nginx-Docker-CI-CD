@@ -1,5 +1,5 @@
 {
-    "name": "walkweb/example-blank-project",
+    "name": "walkweb/blank-php-8.4-mysql-9.3-nginx-docker-ci-cd",
     "description": "Example Blank Project: PHP 8.4 + MySQL 9.3 + Nginx + Docker + CI/CD",
     "type": "project",
     "license": "proprietary",

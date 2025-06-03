@@ -47,7 +47,3 @@ Requirements:
 6. Make changes to the main branch and check CI/CD (Project -> Build -> Pipelines):
 
 ![alt_text](public/img/ci-cd.png)
-
-## Notice
-
-You can view the CI/CD execution in [repository on GitLab](https://gitlab.com/walkweb/symfony-7.2-php-8.4-mysql-9.3-nginx-docker-ci-cd)
