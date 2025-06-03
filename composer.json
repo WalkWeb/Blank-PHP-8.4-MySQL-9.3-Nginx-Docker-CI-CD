@@ -1,0 +1,47 @@
+{
+    "name": "walkweb/example-blank-project",
+    "description": "Example Blank Project: PHP 8.4 + MySQL 9.3 + Nginx + Docker + CI/CD",
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "^5.3",
+        "codeception/module-asserts": "^3.2",
+        "codeception/module-phpbrowser": "^3.0",
+        "codeception/module-rest": "^3.4",
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.1.6",
+        "rector/rector": "^2.0"
+    },
+    "config": {
+        "allow-plugins": {
+        },
+        "bump-after-update": true,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "replace": {
+    },
+    "scripts": {
+        "auto-scripts": {
+        }
+    },
+    "conflict": {
+    },
+    "extra": {
+    }
+}

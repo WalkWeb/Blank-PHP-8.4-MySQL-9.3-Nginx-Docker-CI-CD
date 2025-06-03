@@ -1,0 +1,91 @@
+# Created by WalkWeb, 2025
+
+services:
+
+  app:
+    build: ./docker/php
+    container_name: app
+#    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/app:cached
+      - ./docker/php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+    links:
+      - mysql:mysql
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:9.3
+    container_name: db
+#    restart: always
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+#    restart: always
+    environment:
+      TZ: "Europe/Moscow"
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./:/app
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx/ssl/:/etc/nginx/ssl/
+    links:
+      - app
+    networks:
+      - app-network
+
+  # This container automatically run composer install at up containers. Add run migrations if you need it
+  firststart:
+    container_name: firststart
+    build: ./docker/php
+    volumes:
+      - ./:/app
+    depends_on:
+      - mysql
+    working_dir: /app
+    command: >
+      sh -c "composer install"
+    networks:
+      - app-network
+
+  # Container for local run codeception tests
+  codeception:
+    build: ./docker/php_codeception
+    container_name: codeception
+#    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/app:cached
+      - ./docker/php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+    links:
+      - mysql:mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    name: app-network
