@@ -80,4 +80,4 @@ deploy prod:
     - chmod 400 ~/.ssh/id_rsa
     - ssh-keyscan -t rsa $SERVER_HOST >> ~/.ssh/known_hosts
     # Add run migrations if you need it
-    - ssh $SERVER_USER@$SERVER_HOST "cd /var/www/$APP_DIR/ && git pull origin main && docker exec -d app composer install"
+    - ssh $SERVER_USER@$SERVER_HOST "cd /var/www/$APP_DIR/ && git pull origin main && docker exec -d app composer install --no-dev"
