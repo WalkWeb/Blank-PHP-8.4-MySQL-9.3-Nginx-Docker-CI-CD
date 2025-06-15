@@ -24,7 +24,7 @@ Build:
 
 Added `127.0.0.1 app.loc` in `/etc/hosts`
 
-Open `app.loc`
+Open `app.loc` in browser:
 
 ## Server build and CI/CD
 

@@ -17,7 +17,7 @@ variables:
 
 stages:
   - build
-  - static analys
+  - static analysis
   - tests
   - deploy
 
@@ -34,17 +34,17 @@ migration:
     - echo "Add this run migrations if you need it, or remove this stage" # TODO
 
 code style:
-  stage: static analys
+  stage: static analysis
   script:
     - PHP_CS_FIXER_IGNORE_ENV=1 php vendor/bin/php-cs-fixer check src
 
 phpstan:
-  stage: static analys
+  stage: static analysis
   script:
     - php vendor/bin/phpstan analyse src
 
 rector:
-  stage: static analys
+  stage: static analysis
   script:
     - php vendor/bin/rector
 
