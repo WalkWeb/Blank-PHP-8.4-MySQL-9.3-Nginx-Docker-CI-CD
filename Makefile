@@ -36,5 +36,10 @@ rector:
 phpunit:
 	@$(DOCKER_COMP) exec -e APP_ENV=test app vendor/bin/phpunit
 
+coverage:
+	@$(PHP) vendor/bin/phpunit --coverage-html var/phpunit/coverage
+
 codeception:
 	@$(DOCKER_COMP) exec -e APP_ENV=test codeception vendor/bin/codecept run
+
+test: cs stan rector phpunit
