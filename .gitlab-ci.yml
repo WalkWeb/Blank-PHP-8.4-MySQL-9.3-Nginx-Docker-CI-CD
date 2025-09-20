@@ -1,5 +1,8 @@
 # Created by WalkWeb, 2025
 
+default:
+  interruptible: true
+
 image: walkweb/php-8.4-mysql
 
 cache:
@@ -81,3 +84,5 @@ deploy prod:
     - ssh-keyscan -t rsa $SERVER_HOST >> ~/.ssh/known_hosts
     # Add run migrations if you need it
     - ssh $SERVER_USER@$SERVER_HOST "cd /var/www/$APP_DIR/ && git pull origin main && docker exec -d app composer install --no-dev"
+
+
